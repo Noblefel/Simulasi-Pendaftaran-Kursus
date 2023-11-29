@@ -1,0 +1,14 @@
+[
+    {
+        "nama": "Kupon Belajar",
+        "kode": "SEMANGAT",
+        "potongan": 0.25,
+        "sisa": 4
+    },
+    {
+        "nama": "Test",
+        "kode": "1",
+        "potongan": 0.23,
+        "sisa": 0
+    }
+]

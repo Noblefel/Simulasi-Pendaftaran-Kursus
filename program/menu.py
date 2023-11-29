@@ -1,4 +1,4 @@
-from program import helper as Helper, user as User, kursus as Kursus 
+from program import helper as Helper, user as User, kursus as Kursus, voucher as Voucher
 
 def MenuUtama():   
     pilihanKedua = "Profil" if User.SudahLogin() else "Login " 
@@ -253,7 +253,7 @@ def MenuKursusDetail(kursus: dict | None = None):
         "> 2. Kembali ke Menu Kursus",
     ])
     
-    pilihan = Helper.Pilih()
+    pilihan = Helper.Pilih(tips=False)
     Helper.BersihkanLayar()
     if pilihan == 1:
         MenuKursusDaftar(kursus) 
@@ -268,20 +268,33 @@ def MenuKursusDaftar(kursus: dict):
         Helper.CetakHeader("ERROR - Anda Perlu Login Untuk Mendaftar Kursus", "-")
         MenuKursusDetail(kursus)
 
-    Helper.CetakHeader("PENDAFTARAN KURSUS")
-    Helper.CetakParagraph("Apakah anda yakin ingin mendaftar di kursus \"{0}\" dengan biaya Rp. {1:,}".format(kursus["judul"], kursus["harga"]), 100)
-    Helper.CetakGaris("-")
+    Helper.CetakHeader("DAFTAR KURSUS", "-")
+    Helper.CetakList([
+        "ID:  " + str(kursus["id"]),
+        "Judul: " + kursus["judul"],
+        "Bidang: " + kursus["bidang"],
+        "Durasi: " + kursus["durasi"],
+        "Harga: Rp. {:,}".format(kursus["harga"]),
+        "Apakah anda yakin ingin mendaftar di kursus ini?"
+    ])  
     Helper.CetakList([
         "> 1. Ya",
-        "> 2. Tidak",
+        "> 2. Ya, Gunakan Voucher",
+        "> 3. Tidak",
     ])
 
     pilihan = Helper.Pilih(tips=False)
     Helper.BersihkanLayar()
     if pilihan == 1: 
-        Kursus.DaftarKursus(kursus, User.user, User.semuaUser)  
- 
-    MenuKursusDetail(kursus)
+        Kursus.DaftarKursus(kursus) 
+        MenuKursusDetail(kursus) 
+    elif pilihan == 2:
+        MenuGunakanVoucher(kursus)
+    elif pilihan == 3:
+        MenuKursusDetail(kursus)
+    else:
+        Helper.CetakHeader("ERROR - Pilihan Invalid", "-")
+        MenuKursusDaftar(kursus)
 
 def MenuKursusYangUserIkuti():
     if User.SudahLogin() is False:
@@ -298,4 +311,46 @@ def MenuKursusYangUserIkuti():
     Helper.BersihkanLayar()
     MenuKursus()
 
- 
+def MenuGunakanVoucher(kursus: dict):
+    Helper.CetakHeader("MASUKAN KODE VOUCHER")    
+    kode = Helper.Pilih("Kode: ", False, False) 
+
+    Helper.BersihkanLayar()
+
+    voucher = Voucher.AmbilVoucher(kode)
+
+    if voucher: 
+        Helper.BersihkanLayar()
+        MenuGunakanVoucherKonfirmasi(kursus, voucher)
+    else:
+        MenuGunakanVoucher(kursus) 
+
+def MenuGunakanVoucherKonfirmasi(kursus: dict, voucher: dict):
+    potongan = Voucher.HitungPotongan(voucher, kursus["harga"])
+
+    Helper.CetakHeader("KONFIRMASI PENGGUNAAN VOUCHER", "-")
+    Helper.CetakList([
+        "Kursus: " + kursus["judul"], 
+        "Voucher: " + voucher["nama"],
+        "Harga Asli: Rp. {:,}".format(kursus["harga"]), 
+        "Potongan: {}%".format(voucher["potongan"] * 100) ,
+        "Potongan Harga: Rp. {:,}".format(potongan),
+        "Total Harga: Rp. {:,}".format(kursus["harga"] - potongan),
+        "Apakah anda yakin?"
+    ])
+    Helper.CetakList([ 
+        "> 1. Ya",
+        "> 2. Tidak",
+    ])
+
+    pilihan = Helper.Pilih()
+    Helper.BersihkanLayar()
+    if pilihan == 1:
+        Voucher.GunakanVoucher(voucher)
+        Kursus.DaftarKursus(kursus, potongan)  
+        MenuKursusDetail(kursus)
+    elif pilihan == 2:
+        MenuKursusDaftar(kursus)
+    else:
+        Helper.CetakHeader("ERROR - Pilihan Invalid", "-")
+        MenuGunakanVoucherKonfirmasi(kursus, voucher)

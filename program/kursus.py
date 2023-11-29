@@ -1,5 +1,4 @@
-from program import helper as Helper  
-import operator
+from program import helper as Helper, user as User
 
 semuaKursus:list = None
 semuaTransaksi: list = None 
@@ -11,7 +10,7 @@ def CetakKursus(judul: str = "Daftar Semua Kursus", listKursus: list = None):
         "Judul", 
         "Bidang", 
         "Durasi", 
-        "Harga"
+        "Harga Asli"
     ])
 
     if listKursus is None:
@@ -69,18 +68,21 @@ def AmbilKursus(id: int) -> dict | bool:
             return kursus
     return False
 
-def DaftarKursus(kursus: dict, user: dict, semuaUser: list):
+def DaftarKursus(kursus: dict, potongan: int | float = 0):
     '''Mendaftarkan user ke suatu kursus''' 
     global semuaTransaksi
-
-    if kursus["harga"] >= user["saldo"]:
-        Helper.CetakHeader("Gagal - Saldo Anda Tidak Cukup", "-")
-        return 
+    user = User.user
 
     for t in semuaTransaksi: 
         if t["user_id"] == user["id"] and t["kursus_id"] == kursus["id"]: 
             Helper.CetakHeader("ERROR - Anda telah terdaftar di kursus ini", "-")  
             return 
+
+    harga = kursus["harga"] - potongan
+
+    if harga >= user["saldo"]:
+        Helper.CetakHeader("Gagal - Saldo Anda Tidak Cukup", "-")
+        return 
 
     semuaTransaksi.append({
         "id": Helper.BuatId(semuaTransaksi),
@@ -88,12 +90,12 @@ def DaftarKursus(kursus: dict, user: dict, semuaUser: list):
         "kursus_id": kursus["id"]
     })
 
-    user["saldo"] -= kursus["harga"]
+    user["saldo"] -= harga
 
-    for u in semuaUser:
+    for u in User.semuaUser:
         if u["id"] == user["id"]:
             u = user
 
-    Helper.SaveDataJSON("user.json", semuaUser)
+    Helper.SaveDataJSON("user.json", User.semuaUser)
     Helper.SaveDataJSON("transaksi.json", semuaTransaksi)
     Helper.CetakHeader("SUKSES - mendaftar di kursus ini", "-")  

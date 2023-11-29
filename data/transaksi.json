@@ -2,16 +2,6 @@
     {
         "id": 1,
         "user_id": 1,
-        "kursus_id": 4
-    },
-    {
-        "id": 2,
-        "user_id": 1,
-        "kursus_id": 17
-    },
-    {
-        "id": 3,
-        "user_id": 1,
-        "kursus_id": 21
+        "kursus_id": 1
     }
 ]
