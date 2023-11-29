@@ -1,0 +1,19 @@
+from program import menu, helper, user, kursus
+
+user.semuaUser = helper.AmbilDataJSON("user.json")
+kursus.semuaKursus = helper.AmbilDataJSON("kursus.json")   
+kursus.semuaTransaksi = helper.AmbilDataJSON("transaksi.json")    
+
+helper.BersihkanLayar()
+
+print('''
+\t▒█▀▀▀ ▒█▄░▒█ ▒█▀▀█ ▒█▀▀▀█ ▒█░░░ ▒█░░░ ▒█▀▀█ 
+\t▒█▀▀▀ ▒█▒█▒█ ▒█▄▄▀ ▒█░░▒█ ▒█░░░ ▒█░░░ ▒█░▒█ 
+\t▒█▄▄▄ ▒█░░▀█ ▒█░▒█ ▒█▄▄▄█ ▒█▄▄█ ▒█▄▄█ ░▀▀█▄
+''')
+
+try:
+    menu.MenuUtama()
+except KeyboardInterrupt:
+    helper.BersihkanLayar()
+    helper.CetakHeader("Sampai Jumpa!", "-") 

@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "nama": "1",
+        "password": "1",
+        "saldo": 101435
+    },
+    {
+        "id": 2,
+        "nama": "Antoni",
+        "password": "Antoni",
+        "saldo": 9000
+    }
+]
