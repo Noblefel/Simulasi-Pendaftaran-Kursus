@@ -8,8 +8,7 @@ def CetakKursus(judul: str = "Daftar Semua Kursus", listKursus: list = None):
     tabel = Helper.Tabel(judul, [
         "Id", 
         "Judul", 
-        "Bidang", 
-        "Durasi", 
+        "Bidang",  
         "Harga Asli"
     ])
 
@@ -21,7 +20,6 @@ def CetakKursus(judul: str = "Daftar Semua Kursus", listKursus: list = None):
             kursus["id"], 
             kursus["judul"], 
             kursus["bidang"], 
-            kursus["durasi"],
             "Rp. {:,}".format(kursus["harga"])
         ])
     print(tabel) 
@@ -54,7 +52,7 @@ def CetakKursusYangDiikuti(user: dict):
             idKursus.append(t["kursus_id"])
 
     if len(idKursus) == 0:
-        Helper.CetakHeader("Anda belum mengikuti kursus apapun", "-")
+        Helper.CetakHeader("⛔ Anda belum mengikuti kursus apapun", "-")
         return
     
     kursusYangDiikuti = filter(lambda k: k["id"] in idKursus, semuaKursus)
@@ -75,13 +73,13 @@ def DaftarKursus(kursus: dict, potongan: int | float = 0):
 
     for t in semuaTransaksi: 
         if t["user_id"] == user["id"] and t["kursus_id"] == kursus["id"]: 
-            Helper.CetakHeader("ERROR - Anda telah terdaftar di kursus ini", "-")  
+            Helper.CetakHeader("⚠️\tERROR - Anda telah terdaftar di kursus ini", "-")  
             return 
 
     harga = kursus["harga"] - potongan
 
     if harga >= user["saldo"]:
-        Helper.CetakHeader("Gagal - Saldo Anda Tidak Cukup", "-")
+        Helper.CetakHeader("⛔ Gagal - Saldo Anda Tidak Cukup", "-")
         return 
 
     semuaTransaksi.append({
@@ -98,4 +96,4 @@ def DaftarKursus(kursus: dict, potongan: int | float = 0):
 
     Helper.SaveDataJSON("user.json", User.semuaUser)
     Helper.SaveDataJSON("transaksi.json", semuaTransaksi)
-    Helper.CetakHeader("SUKSES - mendaftar di kursus ini", "-")  
+    Helper.CetakHeader("✅ SUKSES - mendaftar di kursus ini", "-")  

@@ -4,7 +4,6 @@
         "judul": "Analisis Data Pendidikan",
         "bidang": "Pendidikan",
         "deskripsi": "Kursus ini fokus pada pengenalan dan penerapan metode analisis data untuk mendapatkan wawasan dalam perbaikan kebijakan pendidikan, evaluasi program, dan pengambilan keputusan berbasis data.",
-        "durasi": "10 minggu",
         "harga": 284000
     },
     {
@@ -12,7 +11,6 @@
         "judul": "Antropologi Digital",
         "bidang": "Humaniora",
         "deskripsi": "Kursus ini membahas hubungan antara teknologi digital dan masyarakat, dengan fokus pada dampaknya terhadap budaya, identitas, dan interaksi manusia.",
-        "durasi": "10 minggu",
         "harga": 336000
     },
     {
@@ -20,7 +18,6 @@
         "judul": "Biologi Molekuler Lanjutan",
         "bidang": "Sains",
         "deskripsi": "Kursus ini fokus pada konsep-konsep biologi molekuler tingkat lanjut, termasuk teknik-teknik analisis DNA, RNA, dan protein, serta aplikasinya dalam penelitian dan industri.",
-        "durasi": "9 minggu",
         "harga": 274000
     },
     {
@@ -28,7 +25,6 @@
         "judul": "Desain Kurikulum Inovatif",
         "bidang": "Pendidikan",
         "deskripsi": "Kursus ini membahas prinsip-prinsip desain kurikulum inovatif yang responsif terhadap perkembangan terkini dalam pendidikan, termasuk pendekatan berbasis kompetensi dan integrasi teknologi.",
-        "durasi": "9 minggu",
         "harga": 12000
     },
     {
@@ -36,7 +32,6 @@
         "judul": "Drama Teater Eksperimental",
         "bidang": "Seni",
         "deskripsi": "Kursus ini mengajarkan prinsip-prinsip seni teater eksperimental, memberikan ruang bagi eksplorasi kreatif, improvisasi, dan inovasi dalam penyutradaraan dan penampilan teater.",
-        "durasi": "11 minggu",
         "harga": 384000
     },
     {
@@ -44,7 +39,6 @@
         "judul": "Etika Bisnis dan Tanggung Jawab Sosial",
         "bidang": "Bisnis",
         "deskripsi": "Kursus ini mengeksplorasi isu-isu etika bisnis dan tanggung jawab sosial perusahaan, memberikan pemahaman tentang pentingnya integritas dalam pengelolaan bisnis.",
-        "durasi": "11 minggu",
         "harga": 221000
     },
     {
@@ -52,7 +46,6 @@
         "judul": "Fisika Kuantum Terapan",
         "bidang": "Sains",
         "deskripsi": "Kursus ini membahas prinsip-prinsip fisika kuantum dan penerapannya dalam teknologi modern, termasuk komputasi kuantum, sensor kuantum, dan telekomunikasi kuantum.",
-        "durasi": "10 minggu",
         "harga": 298000
     },
     {
@@ -60,7 +53,6 @@
         "judul": "Fisiologi Latihan dan Kesehatan",
         "bidang": "Kesehatan",
         "deskripsi": "Kursus ini mengeksplorasi prinsip-prinsip fisiologi tubuh manusia selama latihan fisik dan dampaknya terhadap kesehatan. Peserta akan memahami hubungan antara aktivitas fisik, metabolisme, dan kesejahteraan umum.",
-        "durasi": "10 minggu",
         "harga": 347000
     },
     {
@@ -68,7 +60,6 @@
         "judul": "Ilmu Pengetahuan Data dalam Penelitian Sains",
         "bidang": "Sains",
         "deskripsi": "Kursus ini mengajarkan konsep ilmu pengetahuan data dan teknik analisis data yang digunakan dalam penelitian sains, dengan fokus pada pengolahan data eksperimental dan simulasi.",
-        "durasi": "12 minggu",
         "harga": 220000
     },
     {
@@ -76,7 +67,6 @@
         "judul": "Inovasi Produk dan Pengembangan Bisnis",
         "bidang": "Bisnis",
         "deskripsi": "Kursus ini membahas strategi inovasi produk, riset pasar, dan pengembangan bisnis yang diperlukan untuk menciptakan produk atau layanan yang kompetitif di pasar.",
-        "durasi": "9 minggu",
         "harga": 23000
     },
     {
@@ -84,7 +74,6 @@
         "judul": "Kebudayaan Digital: Tantangan dan Peluang",
         "bidang": "Humaniora",
         "deskripsi": "Kursus ini memeriksa pergeseran budaya dalam era digital, termasuk dampak teknologi terhadap kebiasaan konsumsi budaya, identitas online, dan tantangan etika yang muncul.",
-        "durasi": "9 minggu",
         "harga": 321000
     },
     {
@@ -92,7 +81,6 @@
         "judul": "Keuangan Bisnis untuk Pemula",
         "bidang": "Bisnis",
         "deskripsi": "Kursus ini dirancang untuk memberikan pemahaman dasar tentang konsep keuangan bisnis, termasuk analisis laporan keuangan, perencanaan anggaran, dan pengambilan keputusan keuangan.",
-        "durasi": "12 minggu",
         "harga": 18000
     },
     {
@@ -100,7 +88,6 @@
         "judul": "Kimia Lingkungan",
         "bidang": "Sains",
         "deskripsi": "Kursus ini mengeksplorasi dampak kimia terhadap lingkungan dan kesehatan manusia, serta strategi pengelolaan bahan kimia untuk pembangunan berkelanjutan.",
-        "durasi": "8 minggu",
         "harga": 312000
     },
     {
@@ -108,7 +95,6 @@
         "judul": "Kreativitas dalam Desain Grafis",
         "bidang": "Seni",
         "deskripsi": "Kursus ini mengeksplorasi aspek kreativitas dalam desain grafis, termasuk teknik visualisasi ide, penggunaan warna, dan implementasi konsep-konsep inovatif dalam desain.",
-        "durasi": "9 minggu",
         "harga": 172000
     },
     {
@@ -116,7 +102,6 @@
         "judul": "Manajemen Kesehatan dan Kebugaran",
         "bidang": "Kesehatan",
         "deskripsi": "Kursus ini membahas strategi manajemen untuk mendukung gaya hidup sehat dan aktif. Peserta akan mempelajari perencanaan program kebugaran, monitoring kesehatan, dan motivasi untuk mempertahankan perilaku sehat.",
-        "durasi": "8 minggu",
         "harga": 114000
     },
     {
@@ -124,7 +109,6 @@
         "judul": "Manajemen Proyek Bisnis",
         "bidang": "Bisnis",
         "deskripsi": "Kursus ini fokus pada teknik manajemen proyek yang diterapkan dalam konteks bisnis, mencakup perencanaan, pelaksanaan, dan evaluasi proyek untuk mencapai tujuan perusahaan.",
-        "durasi": "10 minggu",
         "harga": 361000
     },
     {
@@ -132,7 +116,6 @@
         "judul": "Nutrisi untuk Performa Optimal",
         "bidang": "Kesehatan",
         "deskripsi": "Kursus ini fokus pada konsep nutrisi yang relevan untuk atlet dan individu yang ingin meningkatkan kesehatan dan performa fisik. Materi mencakup pemahaman gizi, suplemen, dan peran nutrisi dalam pemulihan.",
-        "durasi": "12 minggu",
         "harga": 106000
     },
     {
@@ -140,7 +123,6 @@
         "judul": "Pariwisata Budaya Berkelanjutan",
         "bidang": "Humaniora",
         "deskripsi": "Kursus ini fokus pada pengembangan pariwisata budaya yang berkelanjutan, dengan mempertimbangkan pelestarian warisan budaya, partisipasi komunitas, dan dampak positif ekonomi lokal.",
-        "durasi": "11 minggu",
         "harga": 180000
     },
     {
@@ -148,7 +130,6 @@
         "judul": "Pemrograman untuk Pendidikan",
         "bidang": "Pendidikan",
         "deskripsi": "Kursus ini mengajarkan konsep dasar pemrograman dan aplikasinya dalam pengembangan perangkat lunak pendidikan, termasuk pembuatan aplikasi pembelajaran interaktif dan simulasi.",
-        "durasi": "12 minggu",
         "harga": 226000
     },
     {
@@ -156,7 +137,6 @@
         "judul": "Pengembangan Pembelajaran Berbasis Teknologi",
         "bidang": "Pendidikan",
         "deskripsi": "Kursus ini membahas strategi dan teknologi terbaru dalam pengembangan materi pembelajaran berbasis teknologi untuk mendukung efektivitas proses pembelajaran di bidang pendidikan.",
-        "durasi": "8 minggu",
         "harga": 344000
     },
     {
@@ -164,7 +144,6 @@
         "judul": "Pengenalan Ilmu Pengetahuan Alam",
         "bidang": "Sains",
         "deskripsi": "Kursus ini memberikan pemahaman dasar tentang ilmu pengetahuan alam, mencakup konsep-konsep dasar dalam fisika, kimia, dan biologi, serta penerapannya dalam kehidupan sehari-hari.",
-        "durasi": "6 minggu",
         "harga": 18000
     },
     {
@@ -172,7 +151,6 @@
         "judul": "Pertunjukan Interaktif",
         "bidang": "Seni",
         "deskripsi": "Kursus ini memadukan seni pertunjukan dengan teknologi interaktif, membimbing peserta kursus dalam menciptakan pengalaman seni yang dinamis dan terlibat secara aktif dengan penonton.",
-        "durasi": "8 minggu",
         "harga": 211000
     },
     {
@@ -180,7 +158,6 @@
         "judul": "Rehabilitasi dan Pemulihan Cidera Olahraga",
         "bidang": "Kesehatan",
         "deskripsi": "Kursus ini mengajarkan prinsip-prinsip rehabilitasi dan pemulihan setelah cidera olahraga. Peserta akan memahami peran fisioterapi, program latihan pemulihan, dan pencegahan cedera.",
-        "durasi": "11 minggu",
         "harga": 305000
     },
     {
@@ -188,7 +165,6 @@
         "judul": "Sejarah Global: Konflik dan Perubahan",
         "bidang": "Humaniora",
         "deskripsi": "Kursus ini merinci peristiwa sejarah global, mengeksplorasi konflik dan perubahan yang membentuk dunia modern, serta menganalisis dampaknya terhadap budaya dan masyarakat.",
-        "durasi": "9 minggu",
         "harga": 132000
     },
     {
@@ -196,7 +172,6 @@
         "judul": "Seni Digital dan Animasi",
         "bidang": "Seni",
         "deskripsi": "Kursus ini memperkenalkan peserta kursus pada dunia seni digital dan animasi, termasuk teknik pembuatan karakter, visual effects, dan narrative storytelling dalam konteks digital.",
-        "durasi": "12 minggu",
         "harga": 259000
     },
     {
@@ -204,7 +179,6 @@
         "judul": "Seni Rupa Kontemporer",
         "bidang": "Seni",
         "deskripsi": "Kursus ini menggali konsep-konsep seni rupa kontemporer, teknik-teknik inovatif, dan perkembangan seni visual dalam konteks zaman sekarang.",
-        "durasi": "10 minggu",
         "harga": 395000
     },
     {
@@ -212,7 +186,6 @@
         "judul": "Strategi Pemasaran Digital",
         "bidang": "Bisnis",
         "deskripsi": "Kursus ini membahas konsep-konsep pemasaran digital, termasuk penggunaan media sosial, SEO, dan kampanye iklan online untuk meningkatkan visibilitas dan penjualan dalam bisnis.",
-        "durasi": "8 minggu",
         "harga": 16000
     }
 ]

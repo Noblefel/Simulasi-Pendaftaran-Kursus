@@ -17,4 +17,4 @@ try:
     menu.MenuUtama()
 except KeyboardInterrupt:
     helper.BersihkanLayar()
-    helper.CetakHeader("Sampai Jumpa!", "-") 
+    helper.CetakHeader("👋 Sampai Jumpa!", "-") 

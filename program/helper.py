@@ -3,6 +3,7 @@ import json
 import os 
 import prettytable
 import textwrap 
+from emoji import emoji_count
 
 # Settings
 lebarDefault = 58 
@@ -23,7 +24,10 @@ def CetakList(pilihan: list, lebar: int = lebarDefault):
 
     CetakGarisJustified(lebar=lebar)
     for p in pilihan:
-        CetakGarisJustified(p, lebar=lebar)
+        if emoji_count(p):
+            CetakGarisJustified(p, lebar=lebar - 1)
+        else:
+            CetakGarisJustified(p, lebar=lebar)
     CetakGarisJustified(lebar=lebar)
     CetakGaris(lebar=lebar)
 
@@ -59,7 +63,7 @@ def Pilih(string: str = "Masukan Pilihan Anda: ", ubahKeInt: bool = True, tips: 
         return
     elif pilihan == "exit":
         BersihkanLayar()
-        CetakHeader("Sampai Jumpa!", "-")
+        CetakHeader("👋 Sampai Jumpa!", "-")
         exit()
 
     if ubahKeInt is False:
@@ -85,7 +89,7 @@ def AmbilDataJSON(namaFile: str) -> any:
         jsonFile.close()
     except FileNotFoundError: 
         BersihkanLayar()
-        CetakHeader(f"ERROR - File {namaFile} tidak ditemukan" )
+        CetakHeader(f"⚠️\tERROR - File {namaFile} tidak ditemukan" )
         exit()
     except json.decoder.JSONDecodeError as j: 
         SaveDataJSON(namaFile, [])

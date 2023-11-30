@@ -8,7 +8,7 @@ def Login(nama: str, password: str) -> bool:
     global semuaUser, user 
 
     if len(semuaUser) == 0:
-        Helper.CetakHeader("Program belum memiliki user, silahkan Registrasi", "-")
+        Helper.CetakHeader("⛔ Program belum memiliki user, silahkan Registrasi", "-")
         return False
     
     for u in semuaUser:
@@ -16,7 +16,7 @@ def Login(nama: str, password: str) -> bool:
             user = u
             return True
 
-    Helper.CetakHeader("Nama atau Password Salah!", "-")
+    Helper.CetakHeader("⛔ Nama atau Password Salah!", "-")
     return False
 
 def SudahLogin() -> bool:
@@ -33,12 +33,12 @@ def Registrasi(nama: str, password:str, passwordUlang:str) -> bool:
     global semuaUser
     
     if len(nama.replace(" ", "")) == 0 or len(password.replace(" ", "")) == 0:
-        Helper.CetakHeader("Gagal - Input tidak boleh kosong", "-")
+        Helper.CetakHeader("⛔ Gagal - Input tidak boleh kosong", "-")
         return False
     
     for u in semuaUser:
         if nama == u["nama"]:
-            Helper.CetakHeader("Gagal - Nama Telah Dipakai", "-")
+            Helper.CetakHeader("⛔ Gagal - Nama Telah Dipakai", "-")
             return False
 
     if password == passwordUlang:
@@ -50,22 +50,23 @@ def Registrasi(nama: str, password:str, passwordUlang:str) -> bool:
         })
 
         Helper.SaveDataJSON("user.json", semuaUser)
+        Helper.CetakHeader("✅ Registrasi Berhasil!", "-")
         return True
     else:
-        Helper.CetakHeader("Gagal - Password tidak sama!", "-")
+        Helper.CetakHeader("⛔ Gagal - Password tidak sama!", "-")
         return False
     
 def GantiNama(nama: str) -> bool:
     global semuaUser, user
 
     if len(nama.replace(" ", "")) == 0:
-        Helper.CetakHeader("Gagal - Input tidak boleh kosong", "-")
+        Helper.CetakHeader("⛔ Gagal - Input tidak boleh kosong", "-")
         return False
 
     for u in semuaUser:
         if u["id"] != user["id"]:
             if u["nama"] == nama:
-                Helper.CetakHeader("Gagal - Nama Telah Dipakai", "-")
+                Helper.CetakHeader("⛔ Gagal - Nama Telah Dipakai", "-")
                 return False
     
     user["nama"] = nama
@@ -75,14 +76,14 @@ def GantiNama(nama: str) -> bool:
             u = user
 
     Helper.SaveDataJSON("user.json", semuaUser)
-    Helper.CetakHeader("Ganti Nama Berhasil", "-")
+    Helper.CetakHeader("⛔ Ganti Nama Berhasil", "-")
     return True
 
 def GantiPassword(pwLama: str, pwBaru: str) -> bool:
     global semuaUser, user
 
     if len(pwLama.replace(" ", "")) == 0 or len(pwBaru.replace(" ", "")) == 0:
-        Helper.CetakHeader("Gagal - Input tidak boleh kosong", "-")
+        Helper.CetakHeader("⛔ Gagal - Input tidak boleh kosong", "-")
         return False
 
     if Verifikasi(pwLama, "Password Lama Salah") == False:
@@ -95,7 +96,7 @@ def GantiPassword(pwLama: str, pwBaru: str) -> bool:
             u = user
 
     Helper.SaveDataJSON("user.json", semuaUser)
-    Helper.CetakHeader("Ganti Password Berhasil", "-")
+    Helper.CetakHeader("✅ Ganti Password Berhasil", "-")
     return True
 
 def TopUpSaldo(pw: str, saldo: int = 0) -> bool:
@@ -105,11 +106,11 @@ def TopUpSaldo(pw: str, saldo: int = 0) -> bool:
         return False
     
     if type(saldo) == str:
-        Helper.CetakHeader("ERROR - Saldo harus berupa nomor dan tidak boleh kosong", "-")
+        Helper.CetakHeader("⚠️\tERROR - Saldo harus berupa nomor dan tidak boleh kosong", "-")
         return False
         
     if saldo < 1000 :
-        Helper.CetakHeader("ERROR - Saldo tidak boleh kurang dari 1000", "-")
+        Helper.CetakHeader("⚠️\tERROR - Saldo tidak boleh kurang dari 1000", "-")
         return False
         
     user["saldo"] += saldo
@@ -119,12 +120,12 @@ def TopUpSaldo(pw: str, saldo: int = 0) -> bool:
             u = user
 
     Helper.SaveDataJSON("user.json", semuaUser)
-    Helper.CetakHeader("Top Up Saldo Berhasil", "-")
+    Helper.CetakHeader("✅ Top Up Saldo Berhasil", "-")
     return True
 
 def Verifikasi(pw: str, kalimat: str = "Password Anda Salah") -> bool:
     if pw == user["password"]:
         return True
     
-    Helper.CetakHeader("Gagal - " + kalimat, "-")
+    Helper.CetakHeader("⛔ Gagal - " + kalimat, "-")
     return False
