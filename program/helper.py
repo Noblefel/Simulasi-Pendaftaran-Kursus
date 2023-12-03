@@ -24,8 +24,9 @@ def CetakList(pilihan: list, lebar: int = lebarDefault):
 
     CetakGarisJustified(lebar=lebar)
     for p in pilihan:
-        if emoji_count(p):
-            CetakGarisJustified(p, lebar=lebar - 1)
+        extra_space = emoji_count(p)
+        if extra_space:
+            CetakGarisJustified(p, lebar=lebar - extra_space)
         else:
             CetakGarisJustified(p, lebar=lebar)
     CetakGarisJustified(lebar=lebar)

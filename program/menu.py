@@ -61,7 +61,7 @@ def MenuLogin():
         MenuLogin()
 
 def MenuRegistrasi():
-    Helper.CetakHeader("⏏️ REGISTRASI - Silahkan Daftar Akun Anda") 
+    Helper.CetakHeader("⏏️  REGISTRASI - Silahkan Daftar Akun Anda") 
     nama = Helper.Pilih("Nama: ", False, False) 
     password = Helper.Pilih("Password: ", False, False)
     passwordUlang = Helper.Pilih("Ulangi Password: ", False, False)
@@ -142,8 +142,9 @@ def MenuKursus():
         "> 1. 📚 List Semua Kursus",
         "> 2. 📚 List Kursus Berdasarkan Bidang",
         "> 3. 📚 List Kursus Berdasarkan Harga",
-        "> 4. 📓 Detail & Daftar Kursus",
-        "> 5. 📓 Kursus Yang Saya Ikuti", 
+        "> 4. 📚 List Kursus Berdasarkan Rating",
+        "> 5. 📓 Detail & Daftar Kursus",
+        "> 6. 📓 Kursus Yang Saya Ikuti", 
     ])
 
     pilihan = Helper.Pilih()
@@ -158,8 +159,10 @@ def MenuKursus():
     elif pilihan == 3:
         MenuKursusHarga()
     elif pilihan == 4:
-        MenuKursusDetail() 
+        MenuKursusRating()
     elif pilihan == 5:
+        MenuKursusDetail() 
+    elif pilihan == 6:
         MenuKursusYangUserIkuti()
     else:
         Helper.CetakHeader("⚠️\tERROR: Pilihan Invalid!", "-")
@@ -224,6 +227,35 @@ def MenuKursusHarga():
         MenuKursusHarga()
 
     MenuKursus()
+
+def MenuKursusRating():
+    Helper.CetakHeader("SELECT RATING MINIMAL")
+
+    Helper.CetakList([
+        "> 1. ⭐⭐⭐⭐⭐",
+        "> 2. ⭐⭐⭐⭐",
+        "> 3. ⭐⭐⭐",
+        "> 4. ⭐⭐",
+        "> 5. ⭐"
+    ])
+
+    pilihan = Helper.Pilih()
+    Helper.BersihkanLayar()
+    if pilihan == 1:
+        Kursus.CetakKursusMenurutRating(5)
+    elif pilihan == 2:
+        Kursus.CetakKursusMenurutRating(4)
+    elif pilihan == 3:
+        Kursus.CetakKursusMenurutRating(3)
+    elif pilihan == 4:
+        Kursus.CetakKursusMenurutRating(2)
+    elif pilihan == 5:
+        Kursus.CetakKursusMenurutRating(1)
+    else:
+        Helper.CetakHeader("⚠️\tERROR - Pilihan Invalid", "-")
+        MenuKursusRating()
+
+    MenuKursus()
         
 def MenuKursusDetail(kursus: dict | None = None):
 
@@ -242,6 +274,7 @@ def MenuKursusDetail(kursus: dict | None = None):
         "Judul: " + kursus["judul"],
         "Bidang: " + kursus["bidang"], 
         "Harga: Rp. {:,}".format(kursus["harga"]),
+        "Rating: " + "⭐" * kursus["rating"],
     ])
 
     Helper.CetakParagraph("Deskripsi: " + kursus["deskripsi"], 100)

@@ -9,7 +9,8 @@ def CetakKursus(judul: str = "Daftar Semua Kursus", listKursus: list = None):
         "Id", 
         "Judul", 
         "Bidang",  
-        "Harga Asli"
+        "Harga Asli",
+        "Rating",
     ])
 
     if listKursus is None:
@@ -20,7 +21,8 @@ def CetakKursus(judul: str = "Daftar Semua Kursus", listKursus: list = None):
             kursus["id"], 
             kursus["judul"], 
             kursus["bidang"], 
-            "Rp. {:,}".format(kursus["harga"])
+            "Rp. {:,}".format(kursus["harga"]),
+            "⭐" * kursus["rating"],
         ])
     print(tabel) 
 
@@ -32,7 +34,7 @@ def CetakKursusMenurutBidang(bidang: str):
     CetakKursus("List Kursus Di Bidang " + bidang, kursusFiltered)
 
 def CetakKursusMenurutHarga(n1:int, n2:int = None):
-    '''Mencetak kursus yang di fiter menurut range harga'''
+    '''Mencetak kursus yang di filter menurut range harga'''
 
     if n2 is None:
         kursusFiltered = filter(lambda x: x["harga"] >= n1, semuaKursus)
@@ -42,6 +44,13 @@ def CetakKursusMenurutHarga(n1:int, n2:int = None):
         judul = f"List Kursus dengan Harga Rp. {n1:,} - {n2:,}" 
 
     CetakKursus(judul, kursusFiltered)
+
+def CetakKursusMenurutRating(n: int):
+    '''Mencetak Kursus yang di filter menurut rating minimum'''
+    
+    kursusFiltered = filter(lambda x: x["rating"] == n, semuaKursus)
+
+    CetakKursus(f"List Kursus Dengan Rating Minimal {n} Bintang" , kursusFiltered)
 
 def CetakKursusYangDiikuti(user: dict):
     '''Mencetak semua kursus yang telah user ikuti'''

@@ -4,188 +4,215 @@
         "judul": "Analisis Data Pendidikan",
         "bidang": "Pendidikan",
         "deskripsi": "Kursus ini fokus pada pengenalan dan penerapan metode analisis data untuk mendapatkan wawasan dalam perbaikan kebijakan pendidikan, evaluasi program, dan pengambilan keputusan berbasis data.",
-        "harga": 284000
+        "harga": 284000,
+        "rating": 4
     },
     {
         "id": 2,
         "judul": "Antropologi Digital",
         "bidang": "Humaniora",
         "deskripsi": "Kursus ini membahas hubungan antara teknologi digital dan masyarakat, dengan fokus pada dampaknya terhadap budaya, identitas, dan interaksi manusia.",
-        "harga": 336000
+        "harga": 336000,
+        "rating": 3
     },
     {
         "id": 3,
         "judul": "Biologi Molekuler Lanjutan",
         "bidang": "Sains",
         "deskripsi": "Kursus ini fokus pada konsep-konsep biologi molekuler tingkat lanjut, termasuk teknik-teknik analisis DNA, RNA, dan protein, serta aplikasinya dalam penelitian dan industri.",
-        "harga": 274000
+        "harga": 274000,
+        "rating": 5
     },
     {
         "id": 4,
         "judul": "Desain Kurikulum Inovatif",
         "bidang": "Pendidikan",
         "deskripsi": "Kursus ini membahas prinsip-prinsip desain kurikulum inovatif yang responsif terhadap perkembangan terkini dalam pendidikan, termasuk pendekatan berbasis kompetensi dan integrasi teknologi.",
-        "harga": 12000
+        "harga": 12000,
+        "rating": 2
     },
     {
         "id": 5,
         "judul": "Drama Teater Eksperimental",
         "bidang": "Seni",
         "deskripsi": "Kursus ini mengajarkan prinsip-prinsip seni teater eksperimental, memberikan ruang bagi eksplorasi kreatif, improvisasi, dan inovasi dalam penyutradaraan dan penampilan teater.",
-        "harga": 384000
+        "harga": 384000,
+        "rating": 4
     },
     {
         "id": 6,
         "judul": "Etika Bisnis dan Tanggung Jawab Sosial",
         "bidang": "Bisnis",
         "deskripsi": "Kursus ini mengeksplorasi isu-isu etika bisnis dan tanggung jawab sosial perusahaan, memberikan pemahaman tentang pentingnya integritas dalam pengelolaan bisnis.",
-        "harga": 221000
+        "harga": 221000,
+        "rating": 1
     },
     {
         "id": 7,
         "judul": "Fisika Kuantum Terapan",
         "bidang": "Sains",
         "deskripsi": "Kursus ini membahas prinsip-prinsip fisika kuantum dan penerapannya dalam teknologi modern, termasuk komputasi kuantum, sensor kuantum, dan telekomunikasi kuantum.",
-        "harga": 298000
+        "harga": 298000,
+        "rating": 2
     },
     {
         "id": 8,
         "judul": "Fisiologi Latihan dan Kesehatan",
         "bidang": "Kesehatan",
         "deskripsi": "Kursus ini mengeksplorasi prinsip-prinsip fisiologi tubuh manusia selama latihan fisik dan dampaknya terhadap kesehatan. Peserta akan memahami hubungan antara aktivitas fisik, metabolisme, dan kesejahteraan umum.",
-        "harga": 347000
+        "harga": 347000,
+        "rating": 2
     },
     {
         "id": 9,
         "judul": "Ilmu Pengetahuan Data dalam Penelitian Sains",
         "bidang": "Sains",
         "deskripsi": "Kursus ini mengajarkan konsep ilmu pengetahuan data dan teknik analisis data yang digunakan dalam penelitian sains, dengan fokus pada pengolahan data eksperimental dan simulasi.",
-        "harga": 220000
+        "harga": 220000,
+        "rating": 5
     },
     {
         "id": 10,
         "judul": "Inovasi Produk dan Pengembangan Bisnis",
         "bidang": "Bisnis",
         "deskripsi": "Kursus ini membahas strategi inovasi produk, riset pasar, dan pengembangan bisnis yang diperlukan untuk menciptakan produk atau layanan yang kompetitif di pasar.",
-        "harga": 23000
+        "harga": 23000,
+        "rating": 3
     },
     {
         "id": 11,
         "judul": "Kebudayaan Digital: Tantangan dan Peluang",
         "bidang": "Humaniora",
         "deskripsi": "Kursus ini memeriksa pergeseran budaya dalam era digital, termasuk dampak teknologi terhadap kebiasaan konsumsi budaya, identitas online, dan tantangan etika yang muncul.",
-        "harga": 321000
+        "harga": 321000,
+        "rating": 3
     },
     {
         "id": 12,
         "judul": "Keuangan Bisnis untuk Pemula",
         "bidang": "Bisnis",
         "deskripsi": "Kursus ini dirancang untuk memberikan pemahaman dasar tentang konsep keuangan bisnis, termasuk analisis laporan keuangan, perencanaan anggaran, dan pengambilan keputusan keuangan.",
-        "harga": 18000
+        "harga": 18000,
+        "rating": 2
     },
     {
         "id": 13,
         "judul": "Kimia Lingkungan",
         "bidang": "Sains",
         "deskripsi": "Kursus ini mengeksplorasi dampak kimia terhadap lingkungan dan kesehatan manusia, serta strategi pengelolaan bahan kimia untuk pembangunan berkelanjutan.",
-        "harga": 312000
+        "harga": 312000,
+        "rating": 2
     },
     {
         "id": 14,
         "judul": "Kreativitas dalam Desain Grafis",
         "bidang": "Seni",
         "deskripsi": "Kursus ini mengeksplorasi aspek kreativitas dalam desain grafis, termasuk teknik visualisasi ide, penggunaan warna, dan implementasi konsep-konsep inovatif dalam desain.",
-        "harga": 172000
+        "harga": 172000,
+        "rating": 2
     },
     {
         "id": 15,
         "judul": "Manajemen Kesehatan dan Kebugaran",
         "bidang": "Kesehatan",
         "deskripsi": "Kursus ini membahas strategi manajemen untuk mendukung gaya hidup sehat dan aktif. Peserta akan mempelajari perencanaan program kebugaran, monitoring kesehatan, dan motivasi untuk mempertahankan perilaku sehat.",
-        "harga": 114000
+        "harga": 114000,
+        "rating": 4
     },
     {
         "id": 16,
         "judul": "Manajemen Proyek Bisnis",
         "bidang": "Bisnis",
         "deskripsi": "Kursus ini fokus pada teknik manajemen proyek yang diterapkan dalam konteks bisnis, mencakup perencanaan, pelaksanaan, dan evaluasi proyek untuk mencapai tujuan perusahaan.",
-        "harga": 361000
+        "harga": 361000,
+        "rating": 4
     },
     {
         "id": 17,
         "judul": "Nutrisi untuk Performa Optimal",
         "bidang": "Kesehatan",
         "deskripsi": "Kursus ini fokus pada konsep nutrisi yang relevan untuk atlet dan individu yang ingin meningkatkan kesehatan dan performa fisik. Materi mencakup pemahaman gizi, suplemen, dan peran nutrisi dalam pemulihan.",
-        "harga": 106000
+        "harga": 106000,
+        "rating": 3
     },
     {
         "id": 18,
         "judul": "Pariwisata Budaya Berkelanjutan",
         "bidang": "Humaniora",
         "deskripsi": "Kursus ini fokus pada pengembangan pariwisata budaya yang berkelanjutan, dengan mempertimbangkan pelestarian warisan budaya, partisipasi komunitas, dan dampak positif ekonomi lokal.",
-        "harga": 180000
+        "harga": 180000,
+        "rating": 5
     },
     {
         "id": 19,
         "judul": "Pemrograman untuk Pendidikan",
         "bidang": "Pendidikan",
         "deskripsi": "Kursus ini mengajarkan konsep dasar pemrograman dan aplikasinya dalam pengembangan perangkat lunak pendidikan, termasuk pembuatan aplikasi pembelajaran interaktif dan simulasi.",
-        "harga": 226000
+        "harga": 226000,
+        "rating": 2
     },
     {
         "id": 20,
         "judul": "Pengembangan Pembelajaran Berbasis Teknologi",
         "bidang": "Pendidikan",
         "deskripsi": "Kursus ini membahas strategi dan teknologi terbaru dalam pengembangan materi pembelajaran berbasis teknologi untuk mendukung efektivitas proses pembelajaran di bidang pendidikan.",
-        "harga": 344000
+        "harga": 344000,
+        "rating": 1
     },
     {
         "id": 21,
         "judul": "Pengenalan Ilmu Pengetahuan Alam",
         "bidang": "Sains",
         "deskripsi": "Kursus ini memberikan pemahaman dasar tentang ilmu pengetahuan alam, mencakup konsep-konsep dasar dalam fisika, kimia, dan biologi, serta penerapannya dalam kehidupan sehari-hari.",
-        "harga": 18000
+        "harga": 18000,
+        "rating": 3
     },
     {
         "id": 22,
         "judul": "Pertunjukan Interaktif",
         "bidang": "Seni",
         "deskripsi": "Kursus ini memadukan seni pertunjukan dengan teknologi interaktif, membimbing peserta kursus dalam menciptakan pengalaman seni yang dinamis dan terlibat secara aktif dengan penonton.",
-        "harga": 211000
+        "harga": 211000,
+        "rating": 5
     },
     {
         "id": 23,
         "judul": "Rehabilitasi dan Pemulihan Cidera Olahraga",
         "bidang": "Kesehatan",
         "deskripsi": "Kursus ini mengajarkan prinsip-prinsip rehabilitasi dan pemulihan setelah cidera olahraga. Peserta akan memahami peran fisioterapi, program latihan pemulihan, dan pencegahan cedera.",
-        "harga": 305000
+        "harga": 305000,
+        "rating": 3
     },
     {
         "id": 24,
         "judul": "Sejarah Global: Konflik dan Perubahan",
         "bidang": "Humaniora",
         "deskripsi": "Kursus ini merinci peristiwa sejarah global, mengeksplorasi konflik dan perubahan yang membentuk dunia modern, serta menganalisis dampaknya terhadap budaya dan masyarakat.",
-        "harga": 132000
+        "harga": 132000,
+        "rating": 2
     },
     {
         "id": 25,
         "judul": "Seni Digital dan Animasi",
         "bidang": "Seni",
         "deskripsi": "Kursus ini memperkenalkan peserta kursus pada dunia seni digital dan animasi, termasuk teknik pembuatan karakter, visual effects, dan narrative storytelling dalam konteks digital.",
-        "harga": 259000
+        "harga": 259000,
+        "rating": 4
     },
     {
         "id": 26,
         "judul": "Seni Rupa Kontemporer",
         "bidang": "Seni",
         "deskripsi": "Kursus ini menggali konsep-konsep seni rupa kontemporer, teknik-teknik inovatif, dan perkembangan seni visual dalam konteks zaman sekarang.",
-        "harga": 395000
+        "harga": 395000,
+        "rating": 1
     },
     {
         "id": 27,
         "judul": "Strategi Pemasaran Digital",
         "bidang": "Bisnis",
         "deskripsi": "Kursus ini membahas konsep-konsep pemasaran digital, termasuk penggunaan media sosial, SEO, dan kampanye iklan online untuk meningkatkan visibilitas dan penjualan dalam bisnis.",
-        "harga": 16000
+        "harga": 16000,
+        "rating": 4
     }
 ]
