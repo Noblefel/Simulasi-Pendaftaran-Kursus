@@ -76,7 +76,7 @@ def GantiNama(nama: str) -> bool:
             u = user
 
     Helper.SaveDataJSON("user.json", semuaUser)
-    Helper.CetakHeader("⛔ Ganti Nama Berhasil", "-")
+    Helper.CetakHeader("✅ Ganti Nama Berhasil", "-")
     return True
 
 def GantiPassword(pwLama: str, pwBaru: str) -> bool:

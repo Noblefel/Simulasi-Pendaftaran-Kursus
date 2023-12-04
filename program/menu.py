@@ -99,11 +99,10 @@ def MenuProfil():
         MenuTopUpSaldo() 
     elif pilihan == 4:
         User.Logout()
+        MenuUtama()
     else:
         Helper.CetakHeader("⚠️\tERROR - Pilihan Invalid", "-")
         MenuProfil()
-
-    MenuUtama()
 
 def MenuProfilGantiNama():
     Helper.CetakHeader("GANTI NAMA")
@@ -332,7 +331,7 @@ def MenuKursusYangUserIkuti():
         Helper.CetakHeader("⚠️\tERROR - Anda Perlu Login Untuk Melihat Ini", "-")
         MenuKursus()
 
-    Kursus.CetakKursusYangDiikuti(User.user)
+    Kursus.CetakKursusYangDiikuti()
     Helper.CetakGaris()
     Helper.CetakList([ 
         "> 1. 🔙 Kembali ke Menu Kursus",

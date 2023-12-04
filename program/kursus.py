@@ -29,7 +29,7 @@ def CetakKursus(judul: str = "Daftar Semua Kursus", listKursus: list = None):
 def CetakKursusMenurutBidang(bidang: str):
     '''Mencetak kursus yang di filter menurut bidang'''
 
-    kursusFiltered = filter(lambda x: x["bidang"] == bidang, semuaKursus)
+    kursusFiltered = filter(lambda k: k["bidang"] == bidang, semuaKursus)
 
     CetakKursus("List Kursus Di Bidang " + bidang, kursusFiltered)
 
@@ -37,10 +37,10 @@ def CetakKursusMenurutHarga(n1:int, n2:int = None):
     '''Mencetak kursus yang di filter menurut range harga'''
 
     if n2 is None:
-        kursusFiltered = filter(lambda x: x["harga"] >= n1, semuaKursus)
+        kursusFiltered = filter(lambda k: k["harga"] >= n1, semuaKursus)
         judul = f"List Kursus dengan Harga diatas Rp. {n1:,}+" 
     else:
-        kursusFiltered = filter(lambda x: x["harga"] >= n1 and x["harga"] <= n2, semuaKursus)
+        kursusFiltered = filter(lambda k: k["harga"] >= n1 and k["harga"] <= n2, semuaKursus)
         judul = f"List Kursus dengan Harga Rp. {n1:,} - {n2:,}" 
 
     CetakKursus(judul, kursusFiltered)
@@ -48,12 +48,14 @@ def CetakKursusMenurutHarga(n1:int, n2:int = None):
 def CetakKursusMenurutRating(n: int):
     '''Mencetak Kursus yang di filter menurut rating minimum'''
     
-    kursusFiltered = filter(lambda x: x["rating"] == n, semuaKursus)
+    kursusFiltered = filter(lambda k: k["rating"] == n, semuaKursus)
 
-    CetakKursus(f"List Kursus Dengan Rating Minimal {n} Bintang" , kursusFiltered)
+    CetakKursus(f"List Kursus Dengan Rating {n} Bintang" , kursusFiltered)
 
-def CetakKursusYangDiikuti(user: dict):
+def CetakKursusYangDiikuti():
     '''Mencetak semua kursus yang telah user ikuti'''
+
+    user = User.user
 
     idKursus = []
     for t in semuaTransaksi:
@@ -91,13 +93,13 @@ def DaftarKursus(kursus: dict, potongan: int | float = 0):
         Helper.CetakHeader("⛔ Gagal - Saldo Anda Tidak Cukup", "-")
         return 
 
+    user["saldo"] -= harga
+
     semuaTransaksi.append({
         "id": Helper.BuatId(semuaTransaksi),
         "user_id": user["id"],
         "kursus_id": kursus["id"]
     })
-
-    user["saldo"] -= harga
 
     for u in User.semuaUser:
         if u["id"] == user["id"]:

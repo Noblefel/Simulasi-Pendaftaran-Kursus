@@ -12,6 +12,18 @@ indentasiDefault = 4
 def BersihkanLayar():
     os.system('cls') 
 
+def CetakGaris(garis: str = "=", lebar: int = lebarDefault):
+    '''Mencetak garis seperti "========="'''
+    print(" " * indentasiDefault + garis * lebar) 
+
+def CetakGarisJustified(kalimat: str = "", lebar: int = lebarDefault):
+    '''Mencetak baris dengan batas "|" kanan kiri yang teratur'''
+
+    lebar = lebar - emoji_count(kalimat)
+
+    string = " " * indentasiDefault + f"|   {kalimat.ljust(lebar - 6)} |"
+    print(string)
+
 def CetakHeader(kalimat: str, garis: str = "=", lebar: int = lebarDefault, indentasi: int = indentasiDefault):
     '''Mencetak header dengan garis'''
  
@@ -24,23 +36,9 @@ def CetakList(pilihan: list, lebar: int = lebarDefault):
 
     CetakGarisJustified(lebar=lebar)
     for p in pilihan:
-        extra_space = emoji_count(p)
-        if extra_space:
-            CetakGarisJustified(p, lebar=lebar - extra_space)
-        else:
-            CetakGarisJustified(p, lebar=lebar)
+        CetakGarisJustified(p, lebar=lebar) 
     CetakGarisJustified(lebar=lebar)
     CetakGaris(lebar=lebar)
-
-def CetakGarisJustified(kalimat: str = "", lebar: int = lebarDefault):
-    '''Mencetak baris dengan batas "|" kanan kiri yang teratur'''
-
-    string = " " * indentasiDefault + f"|   {kalimat.ljust(lebar - 6)} |"
-    print(string)
-
-def CetakGaris(garis: str = "=", lebar: int = lebarDefault):
-    '''Mencetak garis seperti "========="'''
-    print(" " * indentasiDefault + garis * lebar) 
  
 def CetakParagraph(paragraph: str, lebar:int = lebarDefault, indentasi: int = indentasiDefault):
     '''Mencetak paragraph panjang yang akan dibreak ke garis baru secara teratur'''
@@ -54,7 +52,6 @@ def Pilih(string: str = "Masukan Pilihan Anda: ", ubahKeInt: bool = True, tips: 
     if tips:
         print(" " * indentasiDefault + "'menu' untuk kembali ke menu utama")
         print(" " * indentasiDefault + "'exit' untuk keluar program \n")
-
 
     pilihan = input(" " * indentasiDefault + string)
 
