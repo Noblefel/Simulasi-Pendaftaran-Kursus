@@ -214,5 +214,21 @@
         "deskripsi": "Kursus ini membahas konsep-konsep pemasaran digital, termasuk penggunaan media sosial, SEO, dan kampanye iklan online untuk meningkatkan visibilitas dan penjualan dalam bisnis.",
         "harga": 16000,
         "rating": 4
+    },
+    {
+        "id": 28,
+        "judul": "asdas",
+        "bidang": "Humaniora",
+        "deskripsi": "apda",
+        "rating": 5,
+        "harga": 250000
+    },
+    {
+        "id": 29,
+        "judul": "asdnaosdnaisndo",
+        "bidang": "Humaniora",
+        "deskripsi": "acsdacadaoscdia",
+        "rating": 5,
+        "harga": 250000
     }
 ]

@@ -3,6 +3,7 @@ import json
 import os 
 import prettytable
 import textwrap 
+import pwinput
 from emoji import emoji_count
 
 # Settings
@@ -46,14 +47,17 @@ def CetakParagraph(paragraph: str, lebar:int = lebarDefault, indentasi: int = in
     listString = textwrap.wrap(paragraph, lebar - 4, initial_indent=" " * indentasi, subsequent_indent=" " * indentasi)
     print("\n".join(listString))
 
-def Pilih(string: str = "Masukan Pilihan Anda: ", ubahKeInt: bool = True, tips: bool = True) -> str | int:
+def Pilih(string: str = "Masukan Pilihan Anda: ", ubahKeInt: bool = True, tips: bool = True, password: bool = False) -> str | int:
     '''Fungsi input() yang dimodifikasi''' 
 
     if tips:
         print(" " * indentasiDefault + "'menu' untuk kembali ke menu utama")
         print(" " * indentasiDefault + "'exit' untuk keluar program \n")
 
-    pilihan = input(" " * indentasiDefault + string)
+    if password:
+        pilihan = pwinput.pwinput(" " * indentasiDefault + string)
+    else:
+        pilihan = input(" " * indentasiDefault + string)
 
     if pilihan == "menu":
         BersihkanLayar()

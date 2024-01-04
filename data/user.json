@@ -2,13 +2,19 @@
     {
         "id": 1,
         "nama": "1",
+        "pendidikan": "D3",
+        "alamat": "Surabay",
         "password": "1",
-        "saldo": 326491.0
+        "saldo": 621991.0,
+        "is_admin": 1 
     },
     {
         "id": 2,
-        "nama": "Antoni",
-        "password": "Antoni",
-        "saldo": 9000
+        "nama": "baru",
+        "pendidikan": "SMA",
+        "alamat": "Jakarta",
+        "password": "baru",
+        "saldo": 0,
+        "is_admin": 0
     }
 ]

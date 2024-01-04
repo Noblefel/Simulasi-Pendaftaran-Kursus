@@ -8,5 +8,10 @@
         "id": 2,
         "user_id": 1,
         "kursus_id": 6
+    },
+    {
+        "id": 3,
+        "user_id": 1,
+        "kursus_id": 3
     }
 ]

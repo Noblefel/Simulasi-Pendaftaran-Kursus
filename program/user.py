@@ -28,7 +28,7 @@ def Logout():
     user = None
     Helper.CetakHeader("Logout Berhasil", "-")
 
-def Registrasi(nama: str, password:str, passwordUlang:str) -> bool:
+def Registrasi(nama: str, pendidikan: str, alamat: str, password:str, passwordUlang:str) -> bool:
     '''Fungsi untuk menyimpan data user baru'''
     global semuaUser
     
@@ -45,6 +45,8 @@ def Registrasi(nama: str, password:str, passwordUlang:str) -> bool:
         semuaUser.append({
             "id": Helper.BuatId(semuaUser),
             "nama": nama, 
+            "pendidikan": pendidikan,
+            "alamat": alamat,
             "password": password, 
             "saldo": 0,
         })
@@ -77,6 +79,32 @@ def GantiNama(nama: str) -> bool:
 
     Helper.SaveDataJSON("user.json", semuaUser)
     Helper.CetakHeader("✅ Ganti Nama Berhasil", "-")
+    return True
+
+def GantiPendidikan(pendidikan: str) -> bool:
+    global semuaUser, user  
+    
+    user["pendidikan"] = pendidikan
+
+    for u in semuaUser:
+        if u["id"] == user["id"]:
+            u = user
+
+    Helper.SaveDataJSON("user.json", semuaUser)
+    Helper.CetakHeader("✅ Ganti Tingkat Pendidikan Berhasil", "-")
+    return True
+
+def GantiAlamat(alamat: str) -> bool:
+    global semuaUser, user  
+    
+    user["alamat"] = alamat
+
+    for u in semuaUser:
+        if u["id"] == user["id"]:
+            u = user
+
+    Helper.SaveDataJSON("user.json", semuaUser)
+    Helper.CetakHeader("✅ Ganti Alamat Berhasil", "-")
     return True
 
 def GantiPassword(pwLama: str, pwBaru: str) -> bool:

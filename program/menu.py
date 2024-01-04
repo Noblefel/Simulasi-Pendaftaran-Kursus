@@ -7,7 +7,8 @@ def MenuUtama():
     Helper.CetakList([
         "> 1. 📚 Kursus",
         "> 2. 👤 " + pilihanKedua,  
-        "> 3. 🚪 Exit" 
+        "> 3. 📝 Panel Admin",
+        "> 4. 🚪 Exit" 
     ])
     pilihan = Helper.Pilih()
 
@@ -20,7 +21,9 @@ def MenuUtama():
             MenuProfil()
         else: 
             MenuAutentikasi()
-    elif pilihan == 3:  
+    elif pilihan == 3:
+        MenuAdmin()
+    elif pilihan == 4:  
         Helper.CetakHeader("👋 Sampai Jumpa", "-")
         exit()
     else:
@@ -50,7 +53,7 @@ def MenuLogin():
     Helper.CetakHeader("LOGIN - Masukan Kredensial Anda") 
 
     nama = Helper.Pilih("Nama: ", False, False)
-    password = Helper.Pilih("Password: ", False, False)
+    password = Helper.Pilih("Password: ", False, False, True)
 
     Helper.BersihkanLayar()
 
@@ -63,12 +66,14 @@ def MenuLogin():
 def MenuRegistrasi():
     Helper.CetakHeader("⏏️  REGISTRASI - Silahkan Daftar Akun Anda") 
     nama = Helper.Pilih("Nama: ", False, False) 
-    password = Helper.Pilih("Password: ", False, False)
-    passwordUlang = Helper.Pilih("Ulangi Password: ", False, False)
+    pendidikan = Helper.Pilih("Tingkat Pendidikan: ", False, False)
+    alamat = Helper.Pilih("Masukan Alamat: ", False, False)
+    password = Helper.Pilih("Password: ", False, False, True)
+    passwordUlang = Helper.Pilih("Ulangi Password: ", False, False, True)
 
-    Helper.BersihkanLayar()
+    Helper.BersihkanLayar() 
 
-    if User.Registrasi(nama, password, passwordUlang):
+    if User.Registrasi(nama, pendidikan, alamat, password, passwordUlang):
         MenuUtama()
     else: 
         MenuRegistrasi() 
@@ -76,17 +81,24 @@ def MenuRegistrasi():
 def MenuProfil():
     Helper.CetakHeader("PROFIL USER")
 
+    tipe = "Admin" if User.user["is_admin"] else "Pengguna"
+
     Helper.CetakList([
         "ID User:  " + str(User.user["id"]),
         "Nama:  " + User.user["nama"],
-        "Saldo: Rp. {:,}".format(User.user["saldo"]) 
+        "Tingkat Pendidikan:  " + User.user["pendidikan"],
+        "Alamat:  " + User.user["alamat"],
+        "Saldo: Rp. {:,}".format(User.user["saldo"]),
+        "Tipe User: " + tipe 
     ])
 
     Helper.CetakList([
         "> 1. 📜 Ganti Nama", 
         "> 2. 📜 Ganti Password",
-        "> 3. 💰 Top Up Saldo",
-        "> 4. 🚪 Logout",
+        "> 3. 📜 Ganti Pendidikan",
+        "> 4. 📜 Ganti Alamat",
+        "> 5. 💰 Top Up Saldo",
+        "> 6. 🚪 Logout",
     ])
 
     pilihan = Helper.Pilih()
@@ -96,8 +108,12 @@ def MenuProfil():
     elif pilihan == 2:
         MenuProfilGantiPassword()
     elif pilihan == 3:
-        MenuTopUpSaldo() 
+        MenuProfilGantiPendidikan()
     elif pilihan == 4:
+        MenuProfilGantiAlamat()
+    elif pilihan == 5:
+        MenuTopUpSaldo() 
+    elif pilihan == 6:
         User.Logout()
         MenuUtama()
     else:
@@ -115,7 +131,7 @@ def MenuProfilGantiNama():
 
 def MenuTopUpSaldo():
     Helper.CetakHeader("💰 TOP UP SALDO")
-    pw = Helper.Pilih("Masukan Password Anda: ", False, False)
+    pw = Helper.Pilih("Masukan Password Anda: ", False, False, True)
     saldo = Helper.Pilih("Masukan saldo: ", tips=False)
 
     Helper.BersihkanLayar()
@@ -126,13 +142,275 @@ def MenuTopUpSaldo():
 
 def MenuProfilGantiPassword():
     Helper.CetakHeader("GANTI PASSWORD")
-    pwLama = Helper.Pilih("Masukan password lama: ", False, False)
-    pwBaru = Helper.Pilih("Masukan password baru: ", False, False)
+    pwLama = Helper.Pilih("Masukan password lama: ", False, False, True)
+    pwBaru = Helper.Pilih("Masukan password baru: ", False, False, True)
     Helper.BersihkanLayar()
     if User.GantiPassword(pwLama, pwBaru):
         MenuProfil()
     else:
         MenuProfilGantiPassword()
+
+def MenuProfilGantiPendidikan():
+    Helper.CetakHeader("GANTI PENDIDIKAN")
+    pendidikan = Helper.Pilih("Masukan tingkat pendidikan baru: ", False, False)
+    Helper.BersihkanLayar()
+    if User.GantiPendidikan(pendidikan):
+        MenuProfil()
+    else:
+        MenuProfilGantiNama()
+
+def MenuProfilGantiAlamat():
+    Helper.CetakHeader("GANTI ALAMAT")
+    alamat = Helper.Pilih("Masukan alamat baru: ", False, False)
+    Helper.BersihkanLayar()
+    if User.GantiAlamat(alamat):
+        MenuProfil()
+    else:
+        MenuProfilGantiNama()
+
+def MenuAdmin():
+    if User.SudahLogin() is False: 
+        Helper.CetakHeader("⚠️  ERROR - Hanya admin yang bisa mengakses panel ini", "-")
+        MenuUtama()
+
+    if User.user["is_admin"] != 1:
+        Helper.CetakHeader("⚠️  ERROR - Hanya admin yang bisa mengakses panel ini", "-")
+        MenuUtama()
+
+    Helper.CetakHeader("MENU ADMIN")
+
+    Helper.CetakList([
+        "> 1. 📚 Tambah Kursus", 
+        "> 2. 📚 Edit Kursus", 
+        "> 3. 🎫 Tambah Voucher",  
+        "> 4. 🎫 Edit Voucher",  
+        "> 5. 🔙 Kembali ke Menu Utama"
+    ])
+
+    pilihan = Helper.Pilih()
+    Helper.BersihkanLayar()
+
+    if pilihan == 1:
+        MenuAdminTambahKursus() 
+    elif pilihan == 2:
+        MenuAdminEditKursus()
+    elif pilihan == 3:
+        MenuAdminTambahVoucher() 
+    elif pilihan == 4:
+        MenuAdminEditVoucher()
+    elif pilihan == 5:
+        MenuUtama()
+    else:  
+        Helper.CetakHeader("⚠️\t ERROR: Pilihan Invalid!", "-")
+        MenuKursus() 
+
+def MenuAdminTambahKursus():
+    Helper.CetakHeader("📚 Masukan Data Kursus Yang Baru")
+    judul = Helper.Pilih("Judul: ", False, False)
+    bidang = Helper.Pilih("Bidang: ", False, False)
+    deskripsi = Helper.Pilih("Deskripsi: ", False, False)
+    rating = Helper.Pilih("Rating (1 - 5): ", tips=False)
+    harga = Helper.Pilih("Harga : Rp. ", tips=False)
+
+    Helper.BersihkanLayar() 
+    if Kursus.BuatKursus(judul, bidang, deskripsi, rating, harga):
+        MenuAdmin()
+    else: 
+        MenuAdminTambahKursus() 
+
+def MenuAdminEditKursus(kursus: dict | None = None):
+    if kursus is None:
+        Helper.CetakHeader("SEARCH KURSUS TERLEBIH DAHULU")
+        id = Helper.Pilih("Masukan ID kursus: ", tips=False)
+        kursus = Kursus.AmbilKursus(id)
+        Helper.BersihkanLayar()
+        if kursus is False:
+            Helper.CetakHeader(f"⚠️\tERROR: Kursus Dengan Id-{id} tidak ditemukan", "-")
+            MenuAdminEditKursus() 
+
+    Helper.CetakHeader("EDIT KURSUS", "-")
+    Helper.CetakList([
+        "ID:  " + str(kursus["id"]),
+        "Judul: " + kursus["judul"],
+        "Bidang: " + kursus["bidang"], 
+        "Harga: Rp. {:,}".format(kursus["harga"]),
+        "Rating: " + "⭐" * kursus["rating"],
+    ])
+
+    Helper.CetakParagraph("Deskripsi: " + kursus["deskripsi"], 100)
+    print("\n")
+    Helper.CetakGaris()
+    Helper.CetakList([
+        "> 1. 📝 Ganti Judul",
+        "> 2. 📝 Ganti Bidang",
+        "> 3. 📝 Ganti Harga",
+        "> 4. 📝 Ganti Rating",
+        "> 5. 📝 Ganti Deskripsi",
+        "> 6. ⛔ Hapus Kursus",
+        "> 7. 🔙 Kembali ke Menu Admin",
+    ])
+    
+    pilihan = Helper.Pilih(tips=False)
+    Helper.BersihkanLayar()
+    if pilihan == 1:
+        MenuAdminEditKursusJudul(kursus) 
+    elif pilihan == 2: 
+        MenuAdminEditKursusBidang(kursus) 
+    elif pilihan == 3: 
+        MenuAdminEditKursusHarga(kursus) 
+    elif pilihan == 4: 
+        MenuAdminEditKursusRating(kursus)
+    elif pilihan == 5: 
+        MenuAdminEditKursusDeskripsi(kursus)  
+    elif pilihan == 6: 
+        Kursus.HapusKursus(kursus)
+        MenuAdmin()
+    elif pilihan == 7: 
+        MenuAdmin()    
+    else:
+        Helper.CetakHeader("⚠️\tERROR - Pilihan Invalid", "-")
+        MenuAdminEditKursus(kursus)
+
+def MenuAdminEditKursusJudul(kursus: dict):
+    Helper.CetakHeader("GANTI JUDUL KURSUS")
+    judul = Helper.Pilih("Masukan judul baru: ", False, False)
+    Helper.BersihkanLayar()
+    if Kursus.GantiJudul(kursus, judul):
+        MenuAdminEditKursus(kursus)
+    else:
+        MenuAdminEditKursusJudul(kursus)
+
+def MenuAdminEditKursusBidang(kursus: dict):
+    Helper.CetakHeader("GANTI BIDANG KURSUS")
+    bidang = Helper.Pilih("Masukan bidang: ", False, False)
+    Helper.BersihkanLayar()
+    if Kursus.GantiBidang(kursus, bidang):
+        MenuAdminEditKursus(kursus)
+    else:
+        MenuAdminEditKursusBidang(kursus)
+
+def MenuAdminEditKursusHarga(kursus: dict):
+    Helper.CetakHeader("GANTI HARGA KURSUS")
+    harga = Helper.Pilih("Masukan harga baru: ", tips=False)
+    Helper.BersihkanLayar()
+    if Kursus.GantiHarga(kursus, harga):
+        MenuAdminEditKursus(kursus)
+    else:
+        MenuAdminEditKursusHarga(kursus)
+
+def MenuAdminEditKursusRating(kursus: dict):
+    Helper.CetakHeader("GANTI RATING KURSUS")
+    rating = Helper.Pilih("Masukan rating baru (1-5): ", tips=False)
+    Helper.BersihkanLayar()
+    if Kursus.GantiRating(kursus, rating):
+        MenuAdminEditKursus(kursus)
+    else:
+        MenuAdminEditKursusRating(kursus)
+
+def MenuAdminEditKursusDeskripsi(kursus: dict):
+    Helper.CetakHeader("GANTI DESKRIPSI KURSUS")
+    deskripsi = Helper.Pilih("Masukan deskripsi baru: ", False, False)
+    Helper.BersihkanLayar()
+    if Kursus.GantiDeskripsi(kursus, deskripsi):
+        MenuAdminEditKursus(kursus)
+    else:
+        MenuAdminEditKursusDeskripsi(kursus)
+
+def MenuAdminTambahVoucher(): 
+    Helper.CetakHeader("🎫 Masukan Data Voucher Yang Baru")
+    nama = Helper.Pilih("Nama: ", False, False)
+    kode = Helper.Pilih("Kode: ", False, False)
+    potongan = Helper.Pilih("Potongan (%): ", tips=False)
+    sisa = Helper.Pilih("Sisa Penggunaan: ", tips=False) 
+
+    Helper.BersihkanLayar() 
+    if Voucher.BuatVoucher(nama, kode, potongan, sisa):
+        MenuAdmin()
+    else: 
+        MenuAdminTambahVoucher() 
+
+def MenuAdminEditVoucher(voucher: dict | None = None):
+    if voucher is None:
+        Helper.CetakHeader("SEARCH VOUCHER TERLEBIH DAHULU")
+        kode = Helper.Pilih("Masukan kode voucher: ", False, False)
+        voucher = Voucher.AmbilVoucherData(kode)
+        Helper.BersihkanLayar()
+        if voucher is False:
+            Helper.CetakHeader(f"⚠️\tERROR: Voucher Dengan kode {kode} tidak ditemukan", "-")
+            MenuAdminEditVoucher() 
+
+    Helper.CetakHeader("EDIT VOUCHER", "-")
+    Helper.CetakList([
+        "Nama:  " + voucher["nama"],
+        "Kode: " + voucher["kode"], 
+        "Potongan: {}%".format(voucher["potongan"] * 100),
+        "Sisa Penggunaan: {}x".format(voucher["sisa"]),
+    ]) 
+
+    Helper.CetakGaris()
+    Helper.CetakList([
+        "> 1. 📝 Ganti Nama",
+        "> 2. 📝 Ganti Kode",
+        "> 3. 📝 Ganti Potongan",
+        "> 4. 📝 Ganti Sisa Penggunaan",
+        "> 5. ⛔ Hapus Voucher",
+        "> 6. 🔙 Kembali ke Menu Admin",
+    ])
+    
+    pilihan = Helper.Pilih(tips=False)
+    Helper.BersihkanLayar()
+    if pilihan == 1:
+        MenuAdminEditVoucherNama(voucher) 
+    elif pilihan == 2: 
+        MenuAdminEditVoucherKode(voucher) 
+    elif pilihan == 3: 
+        MenuAdminEditVoucherPotongan(voucher) 
+    elif pilihan == 4: 
+        MenuAdminEditVoucherSisa(voucher) 
+    elif pilihan == 5: 
+        Voucher.HapusVoucher(voucher)
+        MenuAdmin()  
+    elif pilihan == 6:  
+        MenuAdmin()  
+    else:
+        Helper.CetakHeader("⚠️\tERROR - Pilihan Invalid", "-")
+        MenuAdminEditVoucher(voucher)
+
+def MenuAdminEditVoucherNama(voucher: dict):
+    Helper.CetakHeader("GANTI NAMA VOUCHER")
+    nama = Helper.Pilih("Masukan nama: ", False, False)
+    Helper.BersihkanLayar()
+    if Voucher.GantiNama(voucher, nama):
+        MenuAdminEditVoucher(voucher)
+    else:
+        MenuAdminEditVoucherNama(voucher)
+
+def MenuAdminEditVoucherKode(voucher: dict):
+    Helper.CetakHeader("GANTI KODE VOUCHER")
+    kode = Helper.Pilih("Masukan kode: ", False, False)
+    Helper.BersihkanLayar()
+    if Voucher.GantiKode(voucher, kode):
+        MenuAdminEditVoucher(voucher)
+    else:
+        MenuAdminEditVoucherKode(voucher)
+
+def MenuAdminEditVoucherPotongan(voucher: dict):
+    Helper.CetakHeader("GANTI POTONGAN VOUCHER")
+    potongan = Helper.Pilih("Masukan potongan baru (%): ", tips=False)
+    Helper.BersihkanLayar()
+    if Voucher.GantiPotongan(voucher, potongan):
+        MenuAdminEditVoucher(voucher)
+    else:
+        MenuAdminEditVoucherPotongan(voucher)
+
+def MenuAdminEditVoucherSisa(voucher: dict):
+    Helper.CetakHeader("GANTI SISA PENGGUNAAN VOUCHER")
+    sisa = Helper.Pilih("Masukan sisa: ", tips=False)
+    Helper.BersihkanLayar()
+    if Voucher.GantiSisa(voucher, sisa):
+        MenuAdminEditVoucher(voucher)
+    else:
+        MenuAdminEditVoucherSisa(voucher)
 
 def MenuKursus():
     Helper.CetakHeader("MENU KURSUS")
@@ -164,7 +442,7 @@ def MenuKursus():
     elif pilihan == 6:
         MenuKursusYangUserIkuti()
     else:
-        Helper.CetakHeader("⚠️\tERROR: Pilihan Invalid!", "-")
+        Helper.CetakHeader("⚠️\t ERROR: Pilihan Invalid!", "-")
         MenuKursus()
 
 def MenuKursusBidang():
