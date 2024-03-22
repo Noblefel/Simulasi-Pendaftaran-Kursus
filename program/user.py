@@ -1,159 +1,71 @@
-from program import helper as Helper  
- 
-user: dict = None
-semuaUser: list = None
+class User:
+    def __init__(self, helper):
+        self.u = None # pengguna sekarang
+        self.all = helper.read_json("user.json") # semua User
+        self.h = helper
 
-def Login(nama: str, password: str) -> bool:
-    '''Mencoba untuk mengautentikasikan user'''
-    global semuaUser, user 
+    def sudah_login(self) -> bool:
+        return self.u is not None
 
-    if len(semuaUser) == 0:
-        Helper.CetakHeader("⛔ Program belum memiliki user, silahkan Registrasi", "-")
+    def login(self, nama, pw) -> bool:
+        if nama in self.all:
+            u = self.all[nama]
+            if u["password"] == pw:
+                self.u = u
+                return True
+
+        self.h.header("⛔ Nama atau Password Salah!", "-")
         return False
-    
-    for u in semuaUser:
-        if u["nama"] == nama and u["password"] == password:
-            user = u
-            return True
 
-    Helper.CetakHeader("⛔ Nama atau Password Salah!", "-")
-    return False
+    def logout(self):
+        self.u = None
+        self.h.header("Logout Berhasil", "-")
 
-def SudahLogin() -> bool:
-    '''Cek apakah user sudah login atau belum'''
-    return user is not None
-
-def Logout():
-    global user
-    user = None
-    Helper.CetakHeader("Logout Berhasil", "-")
-
-def Registrasi(nama: str, pendidikan: str, alamat: str, password:str, passwordUlang:str) -> bool:
-    '''Fungsi untuk menyimpan data user baru'''
-    global semuaUser
-    
-    if len(nama.replace(" ", "")) == 0 or len(password.replace(" ", "")) == 0:
-        Helper.CetakHeader("⛔ Gagal - Input tidak boleh kosong", "-")
-        return False
-    
-    for u in semuaUser:
-        if nama == u["nama"]:
-            Helper.CetakHeader("⛔ Gagal - Nama Telah Dipakai", "-")
+    def registrasi(self, nama, pw) -> bool:
+        if len(nama.replace(" ", "")) == 0 or len(pw.replace(" ", "")) == 0:
+            self.h.header("⛔ Gagal - Input tidak boleh kosong", "-")
+            return False
+        if nama in self.all:
+            self.h.header("⛔ Gagal - Nama Telah Dipakai", "-")
             return False
 
-    if password == passwordUlang:
-        semuaUser.append({
-            "id": Helper.BuatId(semuaUser),
-            "nama": nama, 
-            "pendidikan": pendidikan,
-            "alamat": alamat,
-            "password": password, 
+        i = self.all[max(self.all, key=lambda x: self.all[x].get('id',0))]["id"]
+        self.all[nama] = {
+            "id": i + 1,
+            "nama": nama,
+            "password": pw,
+            "pendidikan": "",
+            "alamat": "",
             "saldo": 0,
-        })
-
-        Helper.SaveDataJSON("user.json", semuaUser)
-        Helper.CetakHeader("✅ Registrasi Berhasil!", "-")
+            "admin": 0,
+        }
+        self.h.write_json("user.json", self.all)
+        self.h.header("✅ Registrasi Berhasil", "-")
         return True
-    else:
-        Helper.CetakHeader("⛔ Gagal - Password tidak sama!", "-")
-        return False
-    
-def GantiNama(nama: str) -> bool:
-    global semuaUser, user
 
-    if len(nama.replace(" ", "")) == 0:
-        Helper.CetakHeader("⛔ Gagal - Input tidak boleh kosong", "-")
-        return False
-
-    for u in semuaUser:
-        if u["id"] != user["id"]:
-            if u["nama"] == nama:
-                Helper.CetakHeader("⛔ Gagal - Nama Telah Dipakai", "-")
+    def edit(self, k, v) -> bool:
+        if k == "nama": 
+            if len(v.replace(" ", "")) == 0:
+                self.h.header("⛔ Gagal - Nama baru tidak boleh kosong", "-")
                 return False
-    
-    user["nama"] = nama
 
-    for u in semuaUser:
-        if u["id"] == user["id"]:
-            u = user
+            if v in self.all:
+                self.h.header("⛔ Gagal - Nama Telah Dipakai", "-")
+                return False
 
-    Helper.SaveDataJSON("user.json", semuaUser)
-    Helper.CetakHeader("✅ Ganti Nama Berhasil", "-")
-    return True
+            del self.all[self.u["nama"]]
+        elif k == "password":
+            if len(v.replace(" ", "")) == 0:
+                self.h.header("⛔ Gagal - Password baru tidak boleh kosong", "-")
+                return False
+        elif k == "saldo":
+            if isinstance(v, str):
+                self.h.header("⛔ Gagal - Saldo harus berupa nomor", "-")
+                return False
+            v += self.u["saldo"] 
 
-def GantiPendidikan(pendidikan: str) -> bool:
-    global semuaUser, user  
-    
-    user["pendidikan"] = pendidikan
-
-    for u in semuaUser:
-        if u["id"] == user["id"]:
-            u = user
-
-    Helper.SaveDataJSON("user.json", semuaUser)
-    Helper.CetakHeader("✅ Ganti Tingkat Pendidikan Berhasil", "-")
-    return True
-
-def GantiAlamat(alamat: str) -> bool:
-    global semuaUser, user  
-    
-    user["alamat"] = alamat
-
-    for u in semuaUser:
-        if u["id"] == user["id"]:
-            u = user
-
-    Helper.SaveDataJSON("user.json", semuaUser)
-    Helper.CetakHeader("✅ Ganti Alamat Berhasil", "-")
-    return True
-
-def GantiPassword(pwLama: str, pwBaru: str) -> bool:
-    global semuaUser, user
-
-    if len(pwLama.replace(" ", "")) == 0 or len(pwBaru.replace(" ", "")) == 0:
-        Helper.CetakHeader("⛔ Gagal - Input tidak boleh kosong", "-")
-        return False
-
-    if Verifikasi(pwLama, "Password Lama Salah") == False:
-        return False
-    
-    user["password"] = pwBaru
-
-    for u in semuaUser:
-        if u["id"] == user["id"]:
-            u = user
-
-    Helper.SaveDataJSON("user.json", semuaUser)
-    Helper.CetakHeader("✅ Ganti Password Berhasil", "-")
-    return True
-
-def TopUpSaldo(pw: str, saldo: int = 0) -> bool:
-    global semuaUser, user
-    
-    if Verifikasi(pw) == False:
-        return False
-    
-    if type(saldo) == str:
-        Helper.CetakHeader("⚠️\tERROR - Saldo harus berupa nomor dan tidak boleh kosong", "-")
-        return False
-        
-    if saldo < 1000 :
-        Helper.CetakHeader("⚠️\tERROR - Saldo tidak boleh kurang dari 1000", "-")
-        return False
-        
-    user["saldo"] += saldo
-
-    for u in semuaUser:
-        if u["id"] == user["id"]:
-            u = user
-
-    Helper.SaveDataJSON("user.json", semuaUser)
-    Helper.CetakHeader("✅ Top Up Saldo Berhasil", "-")
-    return True
-
-def Verifikasi(pw: str, kalimat: str = "Password Anda Salah") -> bool:
-    if pw == user["password"]:
+        self.u[k] = v
+        self.all[self.u["nama"]] = self.u
+        self.h.write_json("user.json", self.all)
+        self.h.header(f"✅ Edit {k} Berhasil", "-")
         return True
-    
-    Helper.CetakHeader("⛔ Gagal - " + kalimat, "-")
-    return False

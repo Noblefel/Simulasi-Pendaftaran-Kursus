@@ -1,20 +1,13 @@
-from program import menu, helper, user, kursus, voucher
+from program import helper, user, kursus, menu
+import os
 
-user.semuaUser = helper.AmbilDataJSON("user.json")
-kursus.semuaKursus = helper.AmbilDataJSON("kursus.json")   
-kursus.semuaTransaksi = helper.AmbilDataJSON("transaksi.json")    
-voucher.semuaVoucher = helper.AmbilDataJSON("voucher.json")
+path = os.path.realpath(__file__)
+path = path.replace("main.py", "")
+path = os.path.join(path, "data")
 
-helper.BersihkanLayar()
+h = helper.Helper(path)
+u = user.User(h)
+k = kursus.Kursus(h, u)
 
-print('''
-\t▒█▀▀▀ ▒█▄░▒█ ▒█▀▀█ ▒█▀▀▀█ ▒█░░░ ▒█░░░ ▒█▀▀█ 
-\t▒█▀▀▀ ▒█▒█▒█ ▒█▄▄▀ ▒█░░▒█ ▒█░░░ ▒█░░░ ▒█░▒█ 
-\t▒█▄▄▄ ▒█░░▀█ ▒█░▒█ ▒█▄▄▄█ ▒█▄▄█ ▒█▄▄█ ░▀▀█▄
-''')
-
-try:
-    menu.MenuUtama()
-except KeyboardInterrupt:
-    helper.BersihkanLayar()
-    helper.CetakHeader("👋 Sampai Jumpa!", "-") 
+app = menu.Menu(h, u, k)
+app.mulai()

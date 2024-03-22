@@ -1,126 +1,67 @@
-from program import menu 
 import json
-import os 
+import os
 import prettytable
-import textwrap 
-import pwinput
-from emoji import emoji_count
 
-# Settings
-lebarDefault = 58 
-indentasiDefault = 4
+class Helper:
+    def __init__(self, data_path):
+        self.lebar = 58
+        self.path = data_path
 
-def BersihkanLayar():
-    os.system('cls') 
+    def bersihkan_layar(self):
+        os.system('cls')
 
-def CetakGaris(garis: str = "=", lebar: int = lebarDefault):
-    '''Mencetak garis seperti "========="'''
-    print(" " * indentasiDefault + garis * lebar) 
+    def garis(self, garis="=", kalimat=""):
+        if kalimat != "":
+            print(f"    |   {kalimat.ljust(self.lebar - 6)}")
+        else:
+            print("    " + garis * self.lebar)
 
-def CetakGarisJustified(kalimat: str = "", lebar: int = lebarDefault):
-    '''Mencetak baris dengan batas "|" kanan kiri yang teratur'''
+    def header(self, kalimat, garis="="):
+        self.garis(garis)
+        print(kalimat.center(self.lebar + 6))
+        self.garis(garis)
 
-    lebar = lebar - emoji_count(kalimat)
+    def pilihan(self, header, pilihan):
+        if header != "":
+            self.header(header, "-")
+        self.garis()
+        print()
+        for p in pilihan:
+            self.garis(kalimat=p)
+        print()
+        self.garis()
 
-    string = " " * indentasiDefault + f"|   {kalimat.ljust(lebar - 6)} |"
-    print(string)
+    def read_json(self, f_name):
+        path = os.path.join(self.path, f_name)
 
-def CetakHeader(kalimat: str, garis: str = "=", lebar: int = lebarDefault, indentasi: int = indentasiDefault):
-    '''Mencetak header dengan garis'''
- 
-    CetakGaris(garis, lebar)
-    print(" " * indentasi + kalimat.center(lebar))
-    CetakGaris(garis, lebar)
+        try:
+            with open(path, "r") as f:
+                data = json.load(f)
+        except IOError as e:
+            self.bersihkan_layar()
+            print(e)
+            exit()
+        except json.decoder.JSONDecodeError:
+            self.write_json(path, [])
+            data = []
 
-def CetakList(pilihan: list, lebar: int = lebarDefault):
-    '''Mencetak list pilihan dibawah header'''
+        return data
 
-    CetakGarisJustified(lebar=lebar)
-    for p in pilihan:
-        CetakGarisJustified(p, lebar=lebar) 
-    CetakGarisJustified(lebar=lebar)
-    CetakGaris(lebar=lebar)
- 
-def CetakParagraph(paragraph: str, lebar:int = lebarDefault, indentasi: int = indentasiDefault):
-    '''Mencetak paragraph panjang yang akan dibreak ke garis baru secara teratur'''
-    
-    listString = textwrap.wrap(paragraph, lebar - 4, initial_indent=" " * indentasi, subsequent_indent=" " * indentasi)
-    print("\n".join(listString))
+    def write_json(self, f_name, data):
+        path = os.path.join(self.path, f_name)
 
-def Pilih(string: str = "Masukan Pilihan Anda: ", ubahKeInt: bool = True, tips: bool = True, password: bool = False) -> str | int:
-    '''Fungsi input() yang dimodifikasi''' 
+        try:
+            with open(path, "w") as f:
+                json.dump(data, f, indent=4)
+        except IOError as e:
+            self.bersihkan_layar()
+            print(e)
+            exit()
 
-    if tips:
-        print(" " * indentasiDefault + "'menu' untuk kembali ke menu utama")
-        print(" " * indentasiDefault + "'exit' untuk keluar program \n")
+    def tabel(self, judul, headings) -> prettytable.PrettyTable:
+        tabel = prettytable.PrettyTable(headings)
+        tabel.padding_width = 2
+        tabel.align = "l"
+        tabel.title = judul
 
-    if password:
-        pilihan = pwinput.pwinput(" " * indentasiDefault + string)
-    else:
-        pilihan = input(" " * indentasiDefault + string)
-
-    if pilihan == "menu":
-        BersihkanLayar()
-        menu.MenuUtama()
-        return
-    elif pilihan == "exit":
-        BersihkanLayar()
-        CetakHeader("👋 Sampai Jumpa!", "-")
-        exit()
-
-    if ubahKeInt is False:
-        return pilihan
-
-    try:
-        pilihanInt = int(pilihan)
-    except ValueError:
-        return pilihan
- 
-    return pilihanInt
-
-def AmbilDataJSON(namaFile: str) -> any:
-    '''Ambil data dari file .json di dalam folder "data"'''
-
-    path = os.path.realpath(__file__)
-    path = path.replace('program', 'data')
-    path = path.replace('helper.py', "") + namaFile
-
-    try:
-        jsonFile = open(path)
-        data = json.load(jsonFile)
-        jsonFile.close()
-    except FileNotFoundError: 
-        BersihkanLayar()
-        CetakHeader(f"⚠️\tERROR - File {namaFile} tidak ditemukan" )
-        exit()
-    except json.decoder.JSONDecodeError as j: 
-        SaveDataJSON(namaFile, [])
-        data = []
-
-    return data
- 
-def SaveDataJSON(namaFile: str, data: any):
-    '''Safe data ke file .json di dalam folder "data"'''
-
-    path = os.path.realpath(__file__)
-    path = path.replace('program', 'data')
-    path = path.replace('helper.py', "") + namaFile 
-    
-    with open(path, "w") as jsonFile:
-        json.dump(data, jsonFile, indent=4) 
-
-def Tabel(judul: str, headings: list) -> prettytable.PrettyTable:
-    '''Membuat tabel terstruktur dengan package prettytable'''
-
-    tabel = prettytable.PrettyTable(headings)
-    tabel.padding_width = 2
-    tabel.align = "l"
-    tabel.title = judul
-    
-    return tabel
-
-def BuatId(l: list, key: str = "id") -> int:
-    if len(l) == 0:
-        return 1
-    
-    return l[-1][key] + 1 
+        return tabel
